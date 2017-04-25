@@ -4,6 +4,7 @@ Downloads sets from smash.gg then allows for extraction of whatever statistics. 
 How to use:
 
 -run DownloadStats.py and follow the directions
+
 -run killAnalyze.py for some examples
 
 How to add more things:
@@ -14,4 +15,5 @@ everything that you need to extract new stats like maybe stage win% or somthing 
 The pickle is a list with 2 things:
 
 -ALL of the set data as a dict
+
 -a dict with info about every game so u dont have to loop over and grab it before doing whaetever stat
