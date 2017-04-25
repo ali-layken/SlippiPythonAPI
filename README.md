@@ -9,7 +9,7 @@ Downloads sets from smash.gg then allows for extraction of whatever statistics. 
 -run killAnalyze.py for some examples
 
 
-## How to add more things:
+## How to develop:
 -make a pickle and open the pickle created by DownloadStats.py
 
 everything that you need to extract new stats like maybe stage win% or somthing will be conatianed in the pickle.
