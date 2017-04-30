@@ -6,8 +6,6 @@ Downloads sets from smash.gg then allows for extraction of whatever statistics. 
 
 -run DownloadStats.py and follow the directions
 
--run killAnalyze.py for some examples
-
 
 ## How to develop:
 -make a pickle and open the pickle created by DownloadStats.py
