@@ -77,18 +77,32 @@ class Kill:
 def main():
     ggInfo = pickle.load(open('DownloadedInfo.pkl', 'rb'))
     kills = ExtractKillInfo(ggInfo[0], ggInfo[1]) #Get a list of all the kills in a list of sets
+    #Calculate Stats
     PercentxStage = AveragePerStage(kills)
     MovexPlayer = MovePerPlayer(kills)
     PercentxMovexChar = AveragePercentPerMovePerCharacter('fox', kills)
-    print 'Average death percent per stage:'
-    for stage in PercentxStage:
-        print '\t{0:>18}:  {1}%'.format(stage, PercentxStage[stage])
-    print '\n\n Favorite kill move per player:'
-    for player in MovexPlayer:
-        print '\t{0:>15}:  {1}'.format(player, MovexPlayer[player])
-    print '\n\n Average kill percentage per move for: Fox'
-    for move in PercentxMovexChar[1]:
-        print '\t{0:>10}:  {1}%'.format(move, PercentxMovexChar[1][move])
+    #Ouput Stats
+    with open('killOutput.txt', 'w+b') as f:
+        for kill in kills: 
+            #print kill
+            f.write(str(kill)+'\n')
+        #print '\n\nAverage death percent per stage:'
+        f.write('\n\nAverage death percent per stage:\n')
+        for stage in PercentxStage:
+            #print '\t{0:>18}:  {1}%'.format(stage, PercentxStage[stage])
+            f.write('\t{0:>18}:  {1}%\n'.format(stage, PercentxStage[stage]))
+        #print '\n\nFavorite kill move per player:'
+        f.write('\n\nFavorite kill move per player:\n')
+        for player in MovexPlayer:
+            #print '\t{0:>15}:  {1}'.format(player, MovexPlayer[player])
+            f.write('\t{0:>15}:  {1}\n'.format(player, MovexPlayer[player]))
+       #print '\n\nAverage kill percentage per move for: Fox'
+        f.write('\n\nAverage kill percentage per move for: Fox\n')
+        for move in PercentxMovexChar[1]:
+            #print '\t{0:>13}:  {1}%'.format(move, PercentxMovexChar[1][move])
+            f.write('\t{0:>13}:  {1}%\n'.format(move, PercentxMovexChar[1][move]))
+    print '\n\nKill Statisitcs written to killOutput.txt'        
     
 if __name__ == "__main__":
     main()
+

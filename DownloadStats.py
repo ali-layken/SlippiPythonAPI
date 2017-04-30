@@ -3,6 +3,8 @@ import urllib
 import json
 import sys
 import pickle
+import re
+import os
 
 
 #Functions & Classes
@@ -50,11 +52,11 @@ def CalculatePreHitPercent(move, killer, victimFinalPercent):
 	return None
 
 def ConvertMove(id):
-	idList = {1 : 'Turnip?', 2 : 'Jab 1', 3 : 'Jab 2', 4 : 'Jab 3', 6 : 'Dash Attack', 7: 'Ftilt', 8 : 'Utilt', 9 : 'Dtilt', 10 : 'Fsmash', 11 : 'Usmash', 12 : 'Dsmash', 13 : 'Nair', 14 : 'Fair', 15 : 'Bair', 16 : 'Uair', 17 : 'Dair', 18 : 'Nspecial', 19 : 'Fspecial', 20 : 'Uspecial', 21 : 'Dspecial', 52 : 'Dthrow', 53 : 'Fthrow', 54 : 'Bthrow', 55 : 'Uthrow'}
+	idList = {1 : 'Turnip?', 2 : 'Jab 1', 3 : 'Jab 2', 4 : 'Jab 3', 6 : 'Dash Attack', 7: 'Ftilt', 8 : 'Utilt', 9 : 'Dtilt', 10 : 'Fsmash', 11 : 'Usmash', 12 : 'Dsmash', 13 : 'Nair', 14 : 'Fair', 15 : 'Bair', 16 : 'Uair', 17 : 'Dair', 18 : 'Nspecial', 19 : 'Fspecial', 20 : 'Uspecial', 21 : 'Dspecial', 50 : 'Get-up Attack', 52 : 'Dthrow', 53 : 'Fthrow', 54 : 'Bthrow', 55 : 'Uthrow'}
 	return(idList[id])
 
 def ConvertPlayerId(id):
-	idList = {1012 : 'PewPewU', 1017 : 'S2J', 4465 : 'Leffen', 4101 : 'Infinite Numbers', 6189 : 'Armada', 13932 : 'Lucky', 1004 : 'Hungrybox', 1008 : 'Westballz', 1055 : 'Swedish Delight', 16342 : 'Axe', 1028 : 'Wizzrobe', 1037 : 'Duck', 1019 : 'SFAT', 4507 : 'The Moon', 4442 : 'Druggedfox', 1000 : 'Mang0', 15179 : 'ChuDat', 1003 : 'Mew2King', 1013 : 'Shroomed'}
+	idList = {1012 : 'PewPewU', 1017 : 'S2J', 4465 : 'Leffen', 4101 : 'Infinite Numbers', 6189 : 'Armada', 13932 : 'Lucky', 1004 : 'Hungrybox', 1008 : 'Westballz', 1055 : 'Swedish Delight', 16342 : 'Axe', 1028 : 'Wizzrobe', 1037 : 'Duck', 1019 : 'SFAT', 4507 : 'The Moon', 4442 : 'Druggedfox', 1000 : 'Mang0', 15179 : 'ChuDat', 1003 : 'Mew2King', 1013 : 'Shroomed', 19573 : 'Ice', 1036 : 'HugS', 15990 : 'Plup'}
 	return(idList[id])
 
 def ConvertCharacter(id):
@@ -70,26 +72,41 @@ def ConvertStage(id):
 def main():
 	#Main
 	#Handle command-line args
-	resultType = raw_input("Set or Phase [s/p]? ")
-	if resultType.lower() == 'p':
-		setNums = DownloadPhaseData(str(input('Enter the smash.gg phase #: ')))
-		print '\n\nDownloading stats for {} sets: {}\n\n'.format(len(setNums), setNums)
-	elif resultType.lower() == 's':
-		setNums = [str(raw_input('Enter the smash.gg set #: '))] 
-		if not setNums: print 'y tho'
-		print '\n\nDownloading stats for 1 set: {}\n\n'.format(setNums)
-	else:
-		setNums = ['7650196'] 
-		print '\n\nDownloading stats for 1 set: {}\n\n'.format(setNums)
+	while True:
+		resultType = raw_input("Set or Whole Bracket [s/b]? ")
+		if resultType.lower() == 'b':
+			print "\nTo get the correct link: go to the event's bracket. Near the top it says 'All Pools', change it to 'Bracket'.\n"
+			inLink = raw_input('Paste the smash.gg bracket link: ')
+			inLink = re.search(r'(?<=id%22%3A)(\d*)', inLink)
+			try:
+				setNums = DownloadPhaseData(inLink.group(1))
+				print '\n\nDownloading stats for {} sets: {}\n\n'.format(len(setNums), setNums)
+				break
+			except:
+				print('Bad Link\n')
+				continue
+		elif resultType.lower() == 's':
+			print "\nTo get the correct link: go to a bracket and click on a set.\n"
+			inLink = raw_input('Paste the smash.gg set link: ')
+			inLink = re.search(r'(?<=/set/)(\d*)', inLink)
+			setNums = [inLink.group(1)] 
+			if not setNums:
+				print ('Bad Link\n')
+				continue
+			print '\n\nDownloading stats for 1 set: {}\n\n'.format(setNums)
+			break
+		else:
+			print "Please enter either s or b"
+			continue
 	setData = DownloadSetData(setNums)	#List containing all of the data about every set in setNums
+	print "\nExtrating and Parsing. Please wait."
 	gameInfo = ExtractGameInfo(setData)	#Takes a list of dicts with game info and returns a list of kills + info about kills
 	with open('DownloadedInfo.pkl', 'w+b') as p:
 		pickle.dump([setData, gameInfo], p, -1)
 	print '\n\nDone'
+	if (raw_input("\n\nDo you want to do extract kill statistics [y/n]? ")).lower() == 'y':
+		os.system('python killAnalyze.py')
 	return None
 
 if __name__ == "__main__":
 	main()
-
-
-
