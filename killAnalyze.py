@@ -82,12 +82,13 @@ def main():
     MovexPlayer = MovePerPlayer(kills)
     PercentxMovexChar = AveragePercentPerMovePerCharacter('fox', kills)
     #Ouput Stats
-    with open('killOutput.txt', 'w+b') as f:
+    with open('kills.txt', 'w+b') as f:
         for kill in kills: 
             #print kill
             f.write(str(kill)+'\n')
+    with open('stats.txt', 'w+b') as f:
         #print '\n\nAverage death percent per stage:'
-        f.write('\n\nAverage death percent per stage:\n')
+        f.write('Average death percent per stage:\n')
         for stage in PercentxStage:
             #print '\t{0:>18}:  {1}%'.format(stage, PercentxStage[stage])
             f.write('\t{0:>18}:  {1}%\n'.format(stage, PercentxStage[stage]))
@@ -101,7 +102,7 @@ def main():
         for move in PercentxMovexChar[1]:
             #print '\t{0:>13}:  {1}%'.format(move, PercentxMovexChar[1][move])
             f.write('\t{0:>13}:  {1}%\n'.format(move, PercentxMovexChar[1][move]))
-    print '\n\nKill Statisitcs written to killOutput.txt'        
+    print '\n\nAll kills written to kills.txt & All sample stats written to stats.txt'        
     
 if __name__ == "__main__":
     main()

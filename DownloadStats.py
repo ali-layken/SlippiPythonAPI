@@ -68,10 +68,8 @@ def ConvertStage(id):
 	return(idList[id])
 
 
-#Main
-def main():
-	#Main
-	#Handle command-line args
+#User Interaction Function:
+def userInput():
 	while True:
 		resultType = raw_input("Set or Whole Bracket [s/b]? ")
 		if resultType.lower() == 'b':
@@ -96,8 +94,13 @@ def main():
 			print '\n\nDownloading stats for 1 set: {}\n\n'.format(setNums)
 			break
 		else:
-			print "Please enter either s or b"
+			print "Please enter either s or b\n"
 			continue
+	return setNums
+
+#Main
+def main():
+	setNums = userInput()
 	setData = DownloadSetData(setNums)	#List containing all of the data about every set in setNums
 	print "\nExtrating and Parsing. Please wait."
 	gameInfo = ExtractGameInfo(setData)	#Takes a list of dicts with game info and returns a list of kills + info about kills
