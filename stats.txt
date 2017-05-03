@@ -1,0 +1,46 @@
+
+
+Average death percent per stage:
+	       Battlefield:  114%
+	   Pokemon Stadium:  126%
+	     Yoshi's Story:  113%
+	 Final Destination:  116%
+	         Dreamland:  135%
+	Fountain of Dreams:  121%
+
+
+Favorite kill move per player:
+	      Hungrybox:  Fair
+	           SFAT:  Bair
+	            S2J:  Fair
+	      Westballz:  Bair
+	           Duck:  Fsmash
+	       The Moon:  Fsmash
+	          Lucky:  Bair
+	         ChuDat:  Dthrow
+	       Shroomed:  Fair
+	        PewPewU:  Fsmash
+	     Druggedfox:  Bair
+	       Wizzrobe:  Fair
+	            Axe:  Usmash
+	       Mew2King:  Bair
+	          Mang0:  Dair
+	Swedish Delight:  Fair
+
+
+Average kill percentage per move for: Fox
+	       Fthrow:  81%
+	         Bair:  127%
+	        Ftilt:  99%
+	       Uthrow:  60%
+	         Dair:  61%
+	        Utilt:  94%
+	         Nair:  119%
+	         Uair:  118%
+	     Uspecial:  62%
+	     Nspecial:  131%
+	       Dsmash:  100%
+	       Fsmash:  122%
+	       Usmash:  119%
+	        Dtilt:  134%
+	     Dspecial:  86%
