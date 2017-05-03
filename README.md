@@ -7,7 +7,7 @@ Downloads sets from smash.gg then allows for extraction of whatever statistics. 
 -run DownloadStats.py and follow the directions
 
 # Ouput:
-killOutput.txt is an example of what the kill statistics look like
+kill.txt & stats.txt are examples of what the output will look like.
 
 ## How to develop:
 -make a pickle and open the pickle created by DownloadStats.py
