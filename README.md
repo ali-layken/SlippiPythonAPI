@@ -1,6 +1,5 @@
 # SlippiPython
-Downloads sets from smash.gg then allows for extraction of whatever statistics. killAnalyze.py has examples.
-
+API for interacting with standardized slippi replay data (.slp) from smash.gg sets. The smash.gg API descrription has been updated and (.slp) has changed alot in the last 7 years. This project is no longer being supported I wrote it in highschool. To work with slippi data in python please refer to this community effort: https://pypi.org/project/py-slippi/
 
 ## How to use:
 
